@@ -9,21 +9,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="index.js"></script>
+    <script type="module" src="./js/index.js" defer></script>
+    <script type="module" src="./js/add.js" defer></script>
 
 </head>
 
 <body>
     <header>
         <div>
-            <img src="./src/book.png" alt="book-icon">
-            <h1>Library.</h1>
-        </div>
-        <div>
-            <button>New</button>
-            <button>Reset</button>
+            <div>
+                <img src="./src/book.png" alt="book-icon">
+                <h1>Library.</h1>
+            </div>
+            <div>
+                <button id="new">New</button>
+                <button id="reset">Reset</button>
+            </div>
         </div>
     </header>
+
+   
+
+
     <main>
         <div class="card">
             <div id="close-card">
@@ -36,86 +43,45 @@
                     <p>John Doe</p>
                 </div>
                 <div>
-                    <p>Already Read</p>
+                    <p id="have-read">Already Read</p>
                     <button>Change</button>
                 </div>
             </div>
             
         </div>
 
-        <div class="card">
-            <div id="close-card">
-                <p>x</p>
-            </div>
-            <div>
-                <div>
-                    <h4>Alice in Wonderland</h4>
-                    <p>John Doe</p>
-                </div>
-                <div>
-                    <p>Not Read Yet</p>
-                    <button>Change</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div id="close-card">
-                <p>x</p>
-            </div>
-            
-            <div>
-                <div>
-                    <h4>Alice in Wonderland</h4>
-                    <p>John Doe</p>
-                </div>
-                <div>
-                    <p>Already Read</p>
-                    <button>Change</button>
-                </div>
-            </div>
-            
-        </div>
-
-        <div class="card">
-            <div id="close-card">
-                <p>x</p>
-            </div>
-            
-            <div>
-                <div>
-                    <h4>Alice in Wonderland</h4>
-                    <p>John Doe</p>
-                </div>
-                <div>
-                    <p>Already Read</p>
-                    <button>Change</button>
-                </div>
-            </div>
-            
-        </div>
-
-        <div class="card">
-            <div id="close-card">
-                <p>x</p>
-            </div>
-            
-            <div>
-                <div>
-                    <h4>Alice in Wonderland</h4>
-                    <p>John Doe</p>
-                </div>
-                <div>
-                    <p>Already Read</p>
-                    <button>Change</button>
-                </div>
-            </div>
-            
-        </div>
-       
-
-            
-        </div>
+        
+      
     </main>
+
+
+    <section>
+         <form action="" method="get" >
+            <h1>Add a book</h1>
+
+            <label for="book-name">
+                <h3>Name of the Book</h3>
+            </label>
+            <input name="book-name" id="book-name" type="text">
+
+            <label for="author">
+                <h3>Author</h3>
+            </label>
+            <input name="author" id="author" type="text">
+
+            <label for="read">
+                <h3>Have you read it?</h3>
+            </label>
+            <div id="radio">
+                <div class="radio-div left" data-value="true">Already Read</div>
+                <div class="radio-div right" data-value="false">Not Yet Read</div>
+            </div>
+
+            <div>
+                <button type="button" id="add">Add</button>
+                <button type="button" id="cancel">Cancel</button>
+            </div>
+         </form>
+    </section>
 </body>
 </html>
