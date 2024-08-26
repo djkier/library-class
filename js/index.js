@@ -5,11 +5,14 @@ const resetBtn = document.querySelector('#reset');
 const addBtn = document.querySelector('#add');
 const cancelBtn = document.querySelector('#cancel');
 const formSection = document.querySelector('section');
+const bookName = document.querySelector('#book-name');
+const authorName = document.querySelector('#author');
 const radio = document.querySelector('#radio');
 
 
 let library = [];
-let user = library.length;
+let userIdCounter = library.length;
+let haveYouReadIt = null;
 
 function NewUser(bookId, book, author, read){
     this.bookId = bookId;
@@ -38,18 +41,75 @@ addCard('the quick brown', 'david x', true);
 addCard('Hello World', 'Nice one', false);
 
 
+
+
+function resetNew() {
+
+    haveYouReadIt ? otherDiv('left') : otherDiv('right');
+
+    bookName.value = '';
+    authorName.value = '';
+    haveYouReadIt = null;
+
+}
+
+
+function chosenColor(targetDiv) {
+    const leftOrRight = document.querySelector(`.${targetDiv}`);
+    leftOrRight.style.backgroundColor = 'var(--dark-color)';
+    leftOrRight.style.color = 'var(--light-color)';
+}
+
+function otherDiv(targetDiv) {
+    const leftOrRight = document.querySelector(`.${targetDiv}`);
+    leftOrRight.style.backgroundColor = 'var(--light-color)';
+    leftOrRight.style.color = 'var(--dark-color)';
+}
+
+function radioDivEvent(e) {
+    const targetDiv = e.target.className.split(' ')[1];
+    if (targetDiv === 'left') {
+        chosenColor('left');
+        otherDiv('right');
+        return true;
+    }
+    else if (targetDiv === 'right') {
+        chosenColor('right');
+        otherDiv('left');
+        return false;
+    }
+
+}
+
+
+
 newBtn.addEventListener('click', () => {
     formSection.style.visibility = 'visible';
+
+    radio.addEventListener('click', e => {
+        haveYouReadIt = radioDivEvent(e);
+    })
 })
 
 cancelBtn.addEventListener('click', () => {
+    resetNew();
     formSection.style.visibility = 'hidden';
 })
 
 
-function radioDivEvent(e) {
-    console.log(e.target.className);
-    
-}
+addBtn.addEventListener('click', () => {
+    console.log(`
+    Book Name: ${bookName.value}, 
+    Author: ${authorName.value}, 
+    Have You Read It?: ${haveYouReadIt}`);
 
-radio.addEventListener('click', e => radioDivEvent(e))
+    resetNew();
+    console.log('again')
+    formSection.style.visibility = 'hidden';
+})
+
+
+
+
+
+

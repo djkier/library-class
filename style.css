@@ -227,6 +227,7 @@ section {
 
         input {
             max-height: 2rem;
+            color: var(--dark-color);
         }
 
         #radio {
@@ -257,14 +258,6 @@ section {
         
         }
 
-        .radio-div:hover {
-            background-color: var(--dark-color);
-            
-            
-            color: var(--light-color);
-            
-        }
-
 
         > div:last-child{
             margin-top: 0.8rem;
@@ -283,10 +276,7 @@ section {
      
         }
 
-        #add {
-            pointer-events: none;
-            opacity: 0.5;
-        }
+
 
         button:hover {
             background-color: var(--light-color);
