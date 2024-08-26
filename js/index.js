@@ -1,49 +1,35 @@
-import { addCard } from "./add.js";
+import { addCard, library, NewUser } from "./add.js";
 
 const newBtn = document.querySelector('#new');
-const resetBtn = document.querySelector('#reset');
 const addBtn = document.querySelector('#add');
 const cancelBtn = document.querySelector('#cancel');
 const formSection = document.querySelector('section');
 const bookName = document.querySelector('#book-name');
 const authorName = document.querySelector('#author');
 const radio = document.querySelector('#radio');
+const formError = document.querySelector('#form-error');
 
-
-let library = [];
-let userIdCounter = library.length + 1;
 let haveYouReadIt = null;
 
-function NewUser(bookId, book, author, read){
-    this.bookId = bookId;
-    this.book = book;
-    this.author = author;
-    this.read = read;
+//samples
+const user1 = new NewUser(1, 'Atomic Habits', 'James Clear', true);
+const user2 = new NewUser(2, 'Better Than Before', 'Gretchen Rubin', false);
+const user3 = new NewUser(3,"Harry Potter and the Sorcerer's Stone", 'J.K. Rowling', true);
 
-    this.changeRead = function() {
-        this.read = !this.read;
-    }
-}
-
-
-const user1 = new NewUser(1, 'a', 'b', true);
-const user2 = new NewUser(2, 'asdf', 'aaa', true);
-const user3 = new NewUser(3,'zxdd', 'qwe', true);
 
 library.push(user1);
 library.push(user2);
 library.push(user3);
-
-console.log(library);
-console.log(library[1].book)
-
-addCard('the quick brown', 'david x', true);
-addCard('Hello World', 'Nice one', false);
+let userIdCounter = library.length;
 
 
 
 
 
+function cleanWord (para) {
+    const clean = para.split(' ').filter((item) => item !== '').join(' ');
+    return clean;
+}
 
 function resetNew() {
 
@@ -52,9 +38,9 @@ function resetNew() {
     bookName.value = '';
     authorName.value = '';
     haveYouReadIt = null;
+    formError.style.visibility = 'hidden';
 
 }
-
 
 function chosenColor(targetDiv) {
     const leftOrRight = document.querySelector(`.${targetDiv}`);
@@ -83,8 +69,6 @@ function radioDivEvent(e) {
 
 }
 
-
-
 newBtn.addEventListener('click', () => {
     formSection.style.visibility = 'visible';
 
@@ -94,24 +78,21 @@ newBtn.addEventListener('click', () => {
 })
 
 
-
-
 addBtn.addEventListener('click', () => {
     const testText = /\w+/;
 
     if (testText.test(bookName.value) && testText.test(authorName.value) && haveYouReadIt !== null) {
-        console.log(`
-            Book Name: ${bookName.value}, 
-            Author: ${authorName.value}, 
-            Have You Read It?: ${haveYouReadIt}`);
+        userIdCounter++;
+        const newBook = new NewUser(userIdCounter, cleanWord(bookName.value), cleanWord(authorName.value), haveYouReadIt);
+        library.push(newBook);
+        resetNew();
+        formSection.style.visibility = 'hidden';
+
     } else {
-        console.log('didnt pass')
+        formError.style.visibility = 'visible';
     }
 
-    resetNew();
-    formSection.style.visibility = 'hidden';
 })
-
 
 cancelBtn.addEventListener('click', () => {
     resetNew();
@@ -120,8 +101,11 @@ cancelBtn.addEventListener('click', () => {
 
 
 
-const testing = 'the     quick  brown fox'
-const splitWords = testing.split(' ');
+
+
+
+
+
 
 
 

@@ -1,12 +1,18 @@
 const main = document.querySelector('main');
+const resetBtn = document.querySelector('#reset');
 
-function addCard(title, author, read) {
+let library = [];
+
+
+
+function addCard(bookId, title, author, read) {
     const card = document.createElement('div');
     card.className = 'card';
+    card.id = `book${bookId}`
     
     const closeCard = document.createElement('div');
     const close = document.createElement('p');
-    closeCard.id = 'close-card';
+    closeCard.className = 'close-card';
     close.textContent = 'x';
     
 
@@ -37,9 +43,41 @@ function addCard(title, author, read) {
     card.append(closeCard, secondDiv);
     main.appendChild(card);
     
+
+    closeCard.addEventListener('click', () => {
+        const bookIdNum = Number(card.id.slice(4));
+        card.style.display= 'none';
+        library = library.filter(book => book.bookId !== bookIdNum);
+        card.remove();
+    })
+
+    changeButton.addEventListener('click', () => {
+        const bookIdNum = Number(card.id.slice(4));
+        library.map((book) => {
+            if (book.bookId === bookIdNum) {
+                book.changeRead();
+                read = book.read;
+            } 
+        })
+        haveRead.textContent = read ? 'Already Read' : 'Not Yet Read';
+    })
+}
+
+function NewUser(bookId, book, author, read){
+    this.bookId = bookId;
+    this.book = book;
+    this.author = author;
+    this.read = read;
+
+    this.changeRead = function() {
+        this.read = !this.read;
+    }
+
+    addCard(this.bookId, this.book, this.author, this.read);
+
 }
 
 
 
 
-export { addCard }
+export { addCard, library, NewUser }
