@@ -78,6 +78,11 @@ function NewUser(bookId, book, author, read){
 }
 
 
+resetBtn.addEventListener('click', () => {
+    library = [];
+    main.replaceChildren();
+})
+
 
 
 export { addCard, library, NewUser }
