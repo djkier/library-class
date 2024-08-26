@@ -11,7 +11,7 @@ const radio = document.querySelector('#radio');
 
 
 let library = [];
-let userIdCounter = library.length;
+let userIdCounter = library.length + 1;
 let haveYouReadIt = null;
 
 function NewUser(bookId, book, author, read){
@@ -39,6 +39,8 @@ console.log(library[1].book)
 
 addCard('the quick brown', 'david x', true);
 addCard('Hello World', 'Nice one', false);
+
+
 
 
 
@@ -91,25 +93,35 @@ newBtn.addEventListener('click', () => {
     })
 })
 
+
+
+
+addBtn.addEventListener('click', () => {
+    const testText = /\w+/;
+
+    if (testText.test(bookName.value) && testText.test(authorName.value) && haveYouReadIt !== null) {
+        console.log(`
+            Book Name: ${bookName.value}, 
+            Author: ${authorName.value}, 
+            Have You Read It?: ${haveYouReadIt}`);
+    } else {
+        console.log('didnt pass')
+    }
+
+    resetNew();
+    formSection.style.visibility = 'hidden';
+})
+
+
 cancelBtn.addEventListener('click', () => {
     resetNew();
     formSection.style.visibility = 'hidden';
 })
 
 
-addBtn.addEventListener('click', () => {
-    console.log(`
-    Book Name: ${bookName.value}, 
-    Author: ${authorName.value}, 
-    Have You Read It?: ${haveYouReadIt}`);
 
-    resetNew();
-    console.log('again')
-    formSection.style.visibility = 'hidden';
-})
-
-
-
+const testing = 'the     quick  brown fox'
+const splitWords = testing.split(' ');
 
 
 
